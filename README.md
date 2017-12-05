@@ -27,7 +27,7 @@ Fortifly: Basic FreeBSD/Ubuntu hardening for cloud servers (ansible playbooks).
     - Allow wheel and user to sudo (NOPASSWD)
     - Install `mosh`
     - Disable root login on ssh.
-    - Update sshd port (`group_vars/all -> ssh_port`).
+    - Update sshd port: `group_vars/all -> ssh_port`.
 
 ## Usage:
 
@@ -49,6 +49,12 @@ Fortifly: Basic FreeBSD/Ubuntu hardening for cloud servers (ansible playbooks).
   - Change `ansible_user` if required.
 - `$ pipenv run 'ansible-playbook -i hosts --ask-pass site.yml'`
   - If you changed `ansible_user`, add `-k` to the `ansible-playbook` command to use `sudo`.
+
+## Tested on:
+
+- FreeBSD 11 (infra: Vultr.com)
+- Ubuntu Linux 17.10 (infra: Vultr.com) 
+
 
 ## References:
 

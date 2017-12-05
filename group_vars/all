@@ -2,4 +2,4 @@ ssh_port: 22
 ssh_user: ansible
 ssh_public_key: "~/.ssh/id_rsa.pub"
 linux: true
-#freebsd: false
+#freebsd: true

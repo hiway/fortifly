@@ -1,7 +1,7 @@
 ---
 
 - name: install python 2.7
-  raw: /usr/bin/apt install -y python-minimal
+  raw: /usr/bin/apt install -y python
 
 - name: run inventory
   setup:
