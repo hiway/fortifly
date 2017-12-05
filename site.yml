@@ -1,0 +1,8 @@
+---
+- name: Basic server hardening for cloud servers
+  hosts: all
+  gather_facts: no
+  remote_user: root
+
+  roles:
+    - fortifly-bootstrap

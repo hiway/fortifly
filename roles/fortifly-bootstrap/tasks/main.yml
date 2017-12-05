@@ -1,0 +1,7 @@
+---
+
+- include: bootstrap-freebsd.yml
+  when: freebsd is defined and freebsd
+
+- include: bootstrap-linux.yml
+  when: linux is defined and linux

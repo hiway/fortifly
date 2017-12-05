@@ -1,0 +1,6 @@
+[fortifly]
+# FreeBSD
+#10.0.0.1 ansible_user=root ansible_python_interpreter=/usr/local/bin/python2.7
+
+# Linux
+#10.0.0.2 ansible_user=root
