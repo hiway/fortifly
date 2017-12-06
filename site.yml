@@ -6,4 +6,5 @@
 
   roles:
     - bootstrap
-    - remote-access
+    - users
+    - sshd

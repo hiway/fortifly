@@ -12,8 +12,3 @@
   tags:
     - freebsd
     - linux
-
-- include: common-ssh.yml
-  tags:
-    - freebsd
-    - linux
