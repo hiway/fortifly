@@ -2,16 +2,6 @@
 
 Fortifly: Basic FreeBSD/Ubuntu hardening for cloud servers (ansible playbooks).
 
-## Expects:
-
-- Python 3.6 on your machine (if using pipenv, else run `pip install ansible` in your virtualenv)
-- `~/.ssh/id_rsa.pub` exists, or edit `group_vars/all` for correct path.
-
-## Defaults:
-
-- `ansible` as ssh user, change in `group_vars/all`.
-- `22` as ssh port, change in `group_vars/all`.
-
 ## Performs tasks:
 
 - Bootstrap host
@@ -30,12 +20,41 @@ Fortifly: Basic FreeBSD/Ubuntu hardening for cloud servers (ansible playbooks).
     - Update sshd port: `group_vars/all -> ssh_port`.
     - Disable root login on ssh.
 
-## Usage:
-
-> Replace `$EDITOR` with your editor of choice.
+## Install:
 
 - `$ git clone https://github.com/hiway/fortifly.git`
 - `$ cd fortifly`
+- `$ pip install pipenv` (if you do not already have `pipenv`)
+- `$ pipenv shell` 
+
+## Quick Run:
+
+Harden a host without changing the `hosts` or `group_vars/all` files. Run inside pipenv shell: 
+
+> WARNING: Run only on newly-created instances. 
+
+```bash
+$ ansible-playbook site.yml \
+  -i "10.0.0.1," \
+  --ask-pass  \
+  --tags linux \ 
+  --extra-vars="ssh_port=222 ssh_user=$USER"
+```
+
+## Expects:
+
+- Python 3.6 on your machine (if using pipenv, else run `pip install ansible` in your virtualenv)
+- `~/.ssh/id_rsa.pub` exists, or edit `group_vars/all` for correct path.
+
+## Defaults:
+
+- `ansible` as ssh user, change in `group_vars/all`.
+- `22` as ssh port, change in `group_vars/all`.
+
+
+## Customize:
+> Replace `$EDITOR` with your editor of choice.
+
 - `$ $EDITOR group_vars/all`
   - Change sshd port if preferred.
   - Change ssh user, default is `ansible`.
@@ -48,18 +67,6 @@ Fortifly: Basic FreeBSD/Ubuntu hardening for cloud servers (ansible playbooks).
 - `$ pipenv run 'ansible-playbook -i hosts --ask-pass site.yml --tags=linux'`
   - If you changed `ansible_user`, add `-k` to the `ansible-playbook` command to use `sudo`.
   - Use appropriate tags, `linux` or `freebsd` to specify the OS of host.
-
-## Quick Run:
-
-Harden a host without changing the `hosts` or `group_vars/all` files. Run inside virtualenv/pipenv: 
-
-```bash
-$ ansible-playbook site.yml \
-  -i "10.0.0.1," \
-  --ask-pass  \
-  --tags linux \ 
-  --extra-vars="ssh_port=222 ssh_user=$USER"
-```
 
 
 ## Tested on:
