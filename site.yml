@@ -1,6 +1,6 @@
 ---
 - name: Basic server hardening for cloud servers
-  hosts: all
+  hosts: '{{ host | default("all") }}'
   gather_facts: no
   remote_user: root
 

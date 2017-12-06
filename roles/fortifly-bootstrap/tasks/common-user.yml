@@ -1,0 +1,10 @@
+---
+- name: create user if missing
+  user: name={{ssh_user}} password=* createhome=yes system=yes state=present
+
+- name: enable key-based ssh access for user
+  authorized_key: user={{ ssh_user }}
+                  key="{{ item }}"
+  with_file:
+    - "{{ssh_public_key}}"
+

@@ -48,6 +48,19 @@ Fortifly: Basic FreeBSD/Ubuntu hardening for cloud servers (ansible playbooks).
   - If you changed `ansible_user`, add `-k` to the `ansible-playbook` command to use `sudo`.
   - Use appropriate tags, `linux` or `freebsd` to specify the OS of host.
 
+## Quick Usage:
+
+Harden a host without changing the `hosts` or `group_vars/all` files. Run inside virtualenv/pipenv: 
+
+```bash
+$ ansible-playbook site.yml \
+  -i "10.0.0.1," \
+  --ask-pass  \
+  --tags linux \ 
+  --extra-vars="ssh_port=222 ssh_user=$USER"
+```
+
+
 ## Tested on:
 
 - FreeBSD 11 (infra: Vultr.com)
@@ -63,4 +76,9 @@ Fortifly: Basic FreeBSD/Ubuntu hardening for cloud servers (ansible playbooks).
 - https://everythingshouldbevirtual.com/automation/ansible-clean-formatted-playbooks/
 - https://gist.github.com/marktheunissen/2979474 (Well documented example playbook)
 - https://gist.github.com/tomster/7585211 (FreeBSD bootstrap, check comment.)
-- https://stackoverflow.com/questions/37333305/ansible-create-a-user-with-sudo-privileges 
+- https://stackoverflow.com/questions/37333305/ansible-create-a-user-with-sudo-privileges
+- https://docs.ansible.com/ansible/latest/playbooks_debugger.html
+- https://docs.ansible.com/ansible/latest/playbooks_conditionals.html 
+- http://www.caphrim.net/ansible/2015/05/24/understanding-ansible-tags.html
+- https://stackoverflow.com/questions/33222641/override-hosts-variable-of-ansible-playbook-from-the-command-line
+- https://stackoverflow.com/a/18199029/996800 (Arbitrary hosts from command line)
