@@ -1,0 +1,10 @@
+---
+
+- include: freebsd-bootstrap.yml
+  tags:
+    - freebsd
+
+- include: linux-bootstrap.yml
+  tags:
+    - linux
+

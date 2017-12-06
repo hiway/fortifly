@@ -1,13 +1,5 @@
 ---
 
-- include: freebsd-bootstrap.yml
-  tags:
-    - freebsd
-
-- include: linux-bootstrap.yml
-  tags:
-    - linux
-
 - include: freebsd-user.yml
   tags:
     - freebsd
