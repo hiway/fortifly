@@ -18,6 +18,7 @@ Fortifly: Basic FreeBSD/Ubuntu hardening for cloud servers (ansible playbooks).
   - FreeBSD:
     - Bootstrap `pkg`
     - Install `sudo`    
+    - Link installed python to `/usr/bin/python`, allowing easier quick-run.
   - Ubuntu:
     - No os-specific tasks.
   - Common:
@@ -48,7 +49,7 @@ Fortifly: Basic FreeBSD/Ubuntu hardening for cloud servers (ansible playbooks).
   - If you changed `ansible_user`, add `-k` to the `ansible-playbook` command to use `sudo`.
   - Use appropriate tags, `linux` or `freebsd` to specify the OS of host.
 
-## Quick Usage:
+## Quick Run:
 
 Harden a host without changing the `hosts` or `group_vars/all` files. Run inside virtualenv/pipenv: 
 
