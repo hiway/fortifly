@@ -39,16 +39,14 @@ Fortifly: Basic FreeBSD/Ubuntu hardening for cloud servers (ansible playbooks).
   - Change sshd port if preferred.
   - Change ssh user, default is `ansible`.
   - Change ssh public key path if required.
-  - Set `linux` to `true` if host is a Ubuntu Linux box.
-  - Set `freebsd` to `true` if host is a FreeBSD box.
-  - If you set `linux: true`, comment out `freebsd` or set it to `false`; similarly for `freebsd: true`, set `linux: false`
 - `$ cp hosts.example hosts`
 - `$ $EDITOR hosts`
   - Copy the example line for FreeBSD or Linux
   - Uncomment and change the hostname or IP address
   - Change `ansible_user` if required.
-- `$ pipenv run 'ansible-playbook -i hosts --ask-pass site.yml'`
+- `$ pipenv run 'ansible-playbook -i hosts --ask-pass site.yml --tags=linux'`
   - If you changed `ansible_user`, add `-k` to the `ansible-playbook` command to use `sudo`.
+  - Use appropriate tags, `linux` or `freebsd` to specify the OS of host.
 
 ## Tested on:
 

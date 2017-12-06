@@ -1,7 +1,13 @@
 ---
 
 - include: bootstrap-freebsd.yml
+  freebsd: true
   when: freebsd is defined and freebsd
+  tags:
+    - freebsd
 
 - include: bootstrap-linux.yml
+  linux: true
   when: linux is defined and linux
+  tags:
+    - linux
