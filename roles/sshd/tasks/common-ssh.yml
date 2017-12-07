@@ -3,7 +3,7 @@
   lineinfile:
     destfile: /etc/ssh/sshd_config
     regexp: '^Port'
-    line: 'Port {{ssh_port}}'
+    line: 'Port {{sshd_port}}'
     state: present
     insertafter: '^#Port'
     validate: '/usr/sbin/sshd -T -f %s'

@@ -38,27 +38,27 @@ $ ansible-playbook site.yml \
   -i "10.0.0.1," \
   --ask-pass  \
   --tags linux \ 
-  --extra-vars="ssh_port=222 ssh_user=$USER"
+  --extra-vars="sshd_port=222 ssh_user=$USER"
 ```
 
 ## Expects:
 
 - Python 3.6 on your machine (if using pipenv, else run `pip install ansible` in your virtualenv)
-- `~/.ssh/id_rsa.pub` exists, or edit `group_vars/all` for correct path.
+- `~/.ssh/id_rsa.pub` exists, or edit `site.yml` for correct path.
 
 ## Defaults:
 
-- `ansible` as ssh user, change in `group_vars/all`.
-- `22` as ssh port, change in `group_vars/all`.
+- `ansible` as ssh user, change in `site.yml`.
+- `22` as sshd port, change in `site.yml`.
 
 
 ## Customize:
 > Replace `$EDITOR` with your editor of choice.
 
-- `$ $EDITOR group_vars/all`
-  - Change sshd port if preferred.
-  - Change ssh user, default is `ansible`.
+- `$ $EDITOR site.yml`
+  - Change ssh username.
   - Change ssh public key path if required.
+  - Change sshd port if preferred.
 - `$ cp hosts.example hosts`
 - `$ $EDITOR hosts`
   - Copy the example line for FreeBSD or Linux

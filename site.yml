@@ -5,6 +5,12 @@
   remote_user: root
 
   roles:
-    - bootstrap
-    - users
-    - sshd
+    - role: bootstrap
+    - role: users
+      vars:
+        - ssh_user: random1
+        - ssh_public_key: "~/.ssh/id_rsa.pub"
+    - role: sshd
+      vars:
+        - sshd_port: 22
+
