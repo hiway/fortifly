@@ -29,7 +29,7 @@ Fortifly: Basic FreeBSD/Ubuntu hardening for cloud servers (ansible playbooks).
 
 ## Quick Run:
 
-Harden a host without changing the `hosts` or `group_vars/all` files. Run inside pipenv shell: 
+Harden a host without changing the `hosts` or `site.yml` files. Run inside pipenv shell: 
 
 > WARNING: Run only on newly-created instances. 
 
