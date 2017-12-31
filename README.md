@@ -68,7 +68,6 @@ $ ansible-playbook site.yml \
   - Change `ansible_user` if required.
 - `$ pipenv run 'ansible-playbook -i hosts --ask-pass site.yml --tags=linux'`
   - If you changed `ansible_user`, add `-k` to the `ansible-playbook` command to use `sudo`.
-  - Use appropriate tags, `linux` or `freebsd` to specify the OS of host.
 
 
 ## Tested on:
