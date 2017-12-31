@@ -13,7 +13,7 @@ Fortifly: Basic FreeBSD/Ubuntu/MacOS hardening for cloud servers (ansible playbo
   - Ubuntu:
     - No os-specific tasks.
   - MacOS:
-    - No os-specific tasks.  
+    - Optionally install brew.
   - Common:
     - Install `python 2.7`
     - Install `mosh`
