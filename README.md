@@ -45,7 +45,7 @@ $ ansible-playbook site.yml \
 
 ## Expects:
 
-- Python 3.6 on your machine (if using pipenv, else run `pip install ansible` in your virtualenv)
+- Python 3.6 on your machine (if using pipenv, else run `pip install ansible` in your preferred python virtualenv)
 - `~/.ssh/id_rsa.pub` exists, or edit `site.yml` for correct path.
 
 ## Defaults:
