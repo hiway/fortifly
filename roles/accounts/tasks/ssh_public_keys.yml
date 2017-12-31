@@ -1,0 +1,18 @@
+- name: set user "{{ item.name }}"
+  set_fact:
+    ssh_user: "{{ item.name }}"
+
+- name: set ssh_public_key
+  set_fact:
+    ssh_public_key: "{{ item.ssh_public_key }}"
+
+- name: Enable key-based ssh access for user
+  become: yes
+  become_method: sudo
+  authorized_key: user={{ ssh_user }}
+                  key="{{ sshpkey }}"
+  with_file:
+    - "{{ssh_public_key}}"
+  loop_control:
+    loop_var: "sshpkey"
+

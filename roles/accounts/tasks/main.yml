@@ -1,0 +1,89 @@
+- name: "Gather OS-specific variables."
+  include_vars: "{{item}}"
+  with_first_found:
+    - "{{ ansible_distribution }}-{{ ansible_distribution_version }}"
+    - "{{ ansible_distribution }}.yml"
+    - "{{ ansible_os_family }}.yml"
+    - "default.yml"
+
+- name: Install sudo
+  include_role:
+    name: metapackage
+  vars:
+    package_name: sudo
+    package_state: present
+  when: ansible_os_family == 'FreeBSD'
+
+- name: Add groups
+  become: yes
+  become_method: sudo
+  group:
+    name="{{ item }}"
+    state=present
+  with_items: "{{ default_groups }}"
+  tags:
+    - users
+
+- name: Remove groups
+  become: yes
+  become_method: sudo
+  group:
+    name="{{ item }}"
+    state=absent
+  with_items: "{{ groups_remove | default([]) }}"
+  tags:
+    - users
+
+- name: Wheel gets sudo with nopassword?
+  become: yes
+  become_method: sudo
+  include_tasks: "add_to_sudoers.yml"
+
+
+- name: Detect bash.
+  raw: which bash
+  register: which_bash
+  ignore_errors: yes
+  changed_when: which_bash is failed
+
+- name: Set shell to bash
+  set_fact:
+    default_shell: "{{ which_bash.stdout | trim }}"
+  when: not which_bash is failed
+
+- name: Fallback to sh for shell, since bash was not found.
+  set_fact:
+    default_shell: '/bin/sh'
+  when: which_bash is failed
+
+- name: Add users
+  become: yes
+  become_method: sudo
+  user:
+    name="{{ item.name }}"
+    shell="{{ item.shell | default(default_shell) }}"
+    groups="{{ ",".join(item.groups | default(default_groups) ) }}"
+    comment="{{ item.comment | default('') }}"
+    state=present
+  with_items: "{{ users | default([]) }}"
+
+- name: Ensure accounts are not locked on Ubuntu.
+  become: yes
+  become_method: sudo
+  include_tasks: "unlock_account.yml"
+  with_items: "{{ users | default([]) }}"
+  when: ansible_os_family == 'Debian'
+
+- name: Remove users
+  become: yes
+  become_method: sudo
+  user:
+    name="{{ item.name }}"
+    state=absent
+    remove=yes
+    force=yes
+  with_items: "{{ users_remove | default([]) }}"
+
+- name: Add ssh public keys
+  include_tasks: "ssh_public_keys.yml"
+  with_items: "{{ users | default([]) }}"

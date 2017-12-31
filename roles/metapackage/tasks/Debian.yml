@@ -1,0 +1,11 @@
+---
+- name: "Ensure {{package_name}} {{package_state}}"
+  become: yes
+  become_method: sudo
+  apt:
+    name: "{{pkg_name}}"
+    state: "present"
+  with_items: "{{installed}}"
+  loop_control:
+    loop_var: pkg_name
+

@@ -1,0 +1,5 @@
+---
+- name: "FreeBSD regenerate locale"
+  become: yes
+  become_method: sudo
+  raw: cap_mkdb /etc/login.conf

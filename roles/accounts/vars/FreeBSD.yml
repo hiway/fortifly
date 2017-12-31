@@ -1,0 +1,4 @@
+---
+default_shell: '/usr/local/bin/bash'
+default_groups:
+  - wheel

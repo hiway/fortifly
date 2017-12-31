@@ -1,0 +1,14 @@
+---
+- name: Is account is locked?
+  command: grep -q "{{ item.name }}:!:" /etc/shadow
+  register: check_account_lock
+  ignore_errors: True
+  changed_when: False
+  become: true
+
+- name: Unlock account {{ item.name }}
+  command: usermod -p "*" {{ item.name }}
+  when: check_account_lock.rc == 0
+  become: true
+
+

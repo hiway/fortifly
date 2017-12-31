@@ -1,0 +1,25 @@
+---
+- name: Check homebrew
+  stat:
+    path: "/usr/local/bin/brew"
+  register: homebrew_exists
+
+- name: "Abort if homebrew is not installed"
+  fail:
+    msg: "Homebrew is required to continue, please install from http://brew.sh/, or set autoinstall_brew=True in vars.yml or pass in --extra-vars."
+  when: homebrew_exists.stat.exists == False and autoinstall_brew == False
+
+- name: Install homebrew
+  raw: '/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
+  when: homebrew_exists.stat.exists and autoinstall_brew == True
+
+- name: Update homebrew
+  homebrew:
+    update_homebrew: True
+  when: homebrew_exists.stat.exists
+  changed_when: False
+
+- name: Install python-2.7
+  homebrew:
+    name: python
+    state: present

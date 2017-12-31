@@ -1,0 +1,10 @@
+---
+- name: Set locale.
+  become: yes
+  become_method: sudo
+  blockinfile:
+    dest: /etc/login.conf
+    block: |
+      :charset={{language|default('en_US.UTF-8')}}:
+      :lang={{charset|default('UTF-8')}}:
+  notify: "FreeBSD regenerate locale"
