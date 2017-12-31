@@ -9,8 +9,11 @@ Fortifly: Basic FreeBSD/Ubuntu hardening for cloud servers (ansible playbooks).
     - Bootstrap `pkg`
     - Install `sudo`    
     - Link installed python to `/usr/bin/python`, allowing easier quick-run.
+    - Install bash.
   - Ubuntu:
     - No os-specific tasks.
+  - MacOS:
+    - No os-specific tasks.  
   - Common:
     - Install `python 2.7`
     - Install `mosh`
