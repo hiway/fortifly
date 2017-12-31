@@ -1,6 +1,6 @@
 ---
 - name: Unknown OS, likely Python is not installed. Trying to autodetect...
-  raw: uname
+  command: uname
   register: os_uname
 
 - set_fact:

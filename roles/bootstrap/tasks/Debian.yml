@@ -2,17 +2,17 @@
 - name: Update apt
   become: yes
   become_method: sudo
-  raw: 'apt-get update'
+  command: 'apt-get update'
   changed_when: False
 
 - name: Check python.
-  raw: /usr/bin/python -V
+  command: /usr/bin/python -V
   register: python_installed
   ignore_errors: True
   changed_when: python_installed is failed
 - name: Install python
   become: yes
   become_method: sudo
-  raw: 'apt-get install -y python'
+  command: 'apt-get install -y python'
   when: python_installed is failed
 

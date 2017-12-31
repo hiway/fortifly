@@ -10,7 +10,7 @@
   when: homebrew_exists.stat.exists == False and autoinstall_brew == False
 
 - name: Install homebrew
-  raw: '/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
+  command: '/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
   when: homebrew_exists.stat.exists and autoinstall_brew == True
 
 - name: Update homebrew

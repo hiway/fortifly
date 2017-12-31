@@ -41,7 +41,7 @@
 
 
 - name: Detect bash.
-  raw: which bash
+  command: which bash
   register: which_bash
   ignore_errors: yes
   changed_when: which_bash is failed
