@@ -73,9 +73,9 @@ $ ansible-playbook site.yml \
 
 ## Tested on:
 
-- FreeBSD 11 (infra: Vultr.com)
-- Ubuntu Linux 17.10 (infra: Vultr.com) 
-
+- FreeBSD 11 (infra: Vultr, Hetzner)
+- Ubuntu Linux 17.10 (infra: Vultr) 
+- MacOS Sierra (infra: 2015 MacBook Air)
 
 ## References:
 
