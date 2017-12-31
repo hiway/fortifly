@@ -1,0 +1,3 @@
+---
+- fail:
+    msg: 'Unsupported Operating System: {{ ansible_os_family }}'

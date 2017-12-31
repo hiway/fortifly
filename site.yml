@@ -1,16 +1,31 @@
 ---
-- name: Basic server hardening for cloud servers
-  hosts: '{{ host | default("all") }}'
+- hosts: all
   gather_facts: no
   remote_user: root
-
   roles:
-    - role: bootstrap
-    - role: users
+    - role: "bootstrap"
+      tags:
+        - bootstrap
+    - role: "prepare"
+      tags:
+        - prepare
+    - role: "accounts"
       vars:
-        - ssh_user: random1
-        - ssh_public_key: "~/.ssh/id_rsa.pub"
-    - role: sshd
+        default_groups:
+          - wheel
+        nopasswd_sudo: True
+        users:
+          - name: 'ansible'
+            groups: ['wheel']
+            append: True
+            ssh_public_key: "~/.ssh/id_rsa.pub"
+      tags:
+        - users
+        - accounts
+    - role: "sshd"
       vars:
-        - sshd_port: 22
+        sshd_Port: "22"
+        sshd_ListenAddress: "0.0.0.0"
+      tags:
+        - sshd
 

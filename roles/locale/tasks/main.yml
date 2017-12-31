@@ -1,11 +1,4 @@
 ---
-- name: "Gather OS-specific variables."
-  include_vars: "{{item}}"
-  with_first_found:
-    - "{{ ansible_distribution }}-{{ ansible_distribution_version }}"
-    - "{{ ansible_distribution }}.yml"
-    - "{{ ansible_os_family }}.yml"
-    - "default.yml"
 
 - name: "Run OS-specific tasks"
   include_tasks: "{{item}}"
@@ -15,6 +8,15 @@
     - "{{ ansible_os_family }}.yml"
     - "default.yml"
 
+- name: Set locale in profile.
+  become: yes
+  become_method: sudo
+  blockinfile:
+    dest: /etc/profile
+    block: |
+      LANG={{language|default('en_US.UTF-8')}};   export LANG
+      CHARSET={{charset|default('UTF-8')}};  export CHARSET
+
+
 - name: Run inventory
   setup:
-

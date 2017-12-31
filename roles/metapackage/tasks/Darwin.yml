@@ -1,0 +1,8 @@
+---
+- name: "Ensure {{package_name}} {{package_state}}"
+  homebrew:
+    name: "{{pkg_name}}"
+    state: "present"
+  with_items: "{{installed}}"
+  loop_control:
+    loop_var: pkg_name

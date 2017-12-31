@@ -1,0 +1,34 @@
+---
+- name: "Detect sudoers file"
+  stat:
+    path: "/usr/local/etc/sudoers"
+  register: local_sudoers
+#  when: nopasswd_sudo is defined and nopasswd_sudo == True
+
+- name: Local sudoers
+  set_fact:
+    sudoers_file: "/usr/local/etc/sudoers"
+  when: local_sudoers.stat is defined and local_sudoers.stat.exists
+
+- name: System sudoers
+  set_fact:
+    sudoers_file: "/etc/sudoers"
+  when: local_sudoers.stat is defined and not local_sudoers.stat.exists
+
+- name: Allow 'wheel' group to have passwordless sudo
+  lineinfile:
+    dest: "{{ sudoers_file }}"
+    state: present
+    regexp: '^%wheel'
+    line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+    validate: visudo -cf %s
+  when: nopasswd_sudo is defined and nopasswd_sudo == True
+
+- name: Allow 'wheel' group to have sudo (with their own password)
+  lineinfile:
+    dest: "{{ sudoers_file }}"
+    state: present
+    regexp: '^%wheel'
+    line: '%wheel ALL=(ALL) ALL'
+    validate: visudo -cf %s
+  when: passwd_sudo is defined and passwd_sudo == True

@@ -1,0 +1,10 @@
+---
+- name: "Install packages..."
+  become: yes
+  become_method: sudo
+  pkgng:
+    name: "{{pkg_name}}"
+    state: "present"
+  with_items: "{{installed}}"
+  loop_control:
+    loop_var: pkg_name

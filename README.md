@@ -90,3 +90,14 @@ $ ansible-playbook site.yml \
 - http://www.caphrim.net/ansible/2015/05/24/understanding-ansible-tags.html
 - https://stackoverflow.com/questions/33222641/override-hosts-variable-of-ansible-playbook-from-the-command-line
 - https://stackoverflow.com/a/18199029/996800 (Arbitrary hosts from command line)
+
+## To be implemented:
+
+- https://www.stackrox.com/post/2017/08/hardening-docker-containers-and-hosts-against-vulnerabilities-a-security-toolkit/
+- http://hakunin.com/six-ansible-practices#avoid-perpetually-changed-and-skipping-tasks
+- https://blather.michaelwlucas.com/archives/1819
+- https://github.com/willshersystems/ansible-sshd
+- https://blog.scottlowe.org/2015/12/24/running-ansible-through-ssh-bastion-host/
+- https://www.alexbilbie.com/2014/07/using-ansible-with-a-bastion-host/
+- https://ryaneschinger.com/blog/securing-a-server-with-ansible/
+- https://www.redpill-linpro.com/sysadvent/2017/12/02/ansible-change-passwords.html

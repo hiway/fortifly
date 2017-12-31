@@ -1,0 +1,54 @@
+---
+- name: Check pkg.
+  raw: /usr/sbin/pkg -N
+  register: pkg
+  ignore_errors: True
+  changed_when: pkg is failed
+
+- name: Install pkg.
+  become: yes
+  become_method: sudo
+  raw: /usr/bin/env ASSUME_ALWAYS_YES=1 /usr/sbin/pkg bootstrap -f
+  when: pkg is failed
+
+- name: Update pkg
+  become: yes
+  become_method: sudo
+  raw: pkg update -f
+  when: pkg is failed
+
+- name: Fetch system and kernel updates
+  become: yes
+  become_method: sudo
+  raw: freebsd-update fetch install --not-running-from-cron
+
+- name: Install system and kernel updates
+  become: yes
+  become_method: sudo
+  raw: pkg update
+
+- name: Install system and kernel updates
+  become: yes
+  become_method: sudo
+  raw: pkg upgrade
+
+- name: Set timezone to UTC
+  timezone:
+    name: UTC
+
+- name: Check python.
+  raw: /usr/bin/python -V
+  register: python_installed
+  ignore_errors: True
+  changed_when: python_installed is failed
+- name: Install python-2.7
+  become: yes
+  become_method: sudo
+  raw: /usr/sbin/pkg install -y python27
+  when: python_installed is failed
+
+- name: Symlink python 2.7 to /usr/bin
+  become: yes
+  become_method: sudo
+  raw: ln /usr/local/bin/python2.7 /usr/bin/python
+  when: python_installed is failed

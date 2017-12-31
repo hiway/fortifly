@@ -1,0 +1,25 @@
+---
+dependencies:
+  - role: locale
+    vars:
+      language: "en_US.UTF-8"
+      charset: "UTF-8"
+    tags:
+      - locale
+  - role: "metapackage"
+    vars:
+      installed:
+        - bash
+        - sudo
+    tags:
+      - common_packages
+  - role: accounts
+    vars:
+      default_groups:
+        - wheel
+      nopasswd_sudo: True
+      users:
+        - name: 'ansible'
+          groups: ['wheel']
+          append: True
+          ssh_public_key: "~/.ssh/id_rsa.pub"

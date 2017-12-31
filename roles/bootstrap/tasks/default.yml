@@ -1,0 +1,33 @@
+---
+- name: Unknown OS, likely Python is not installed. Trying to autodetect...
+  raw: uname
+  register: os_uname
+
+- set_fact:
+    uname: "{{ os_uname.stdout | trim }}"
+
+- name: Detecting Debian
+  set_fact:
+    ansible_os_family: Debian
+  when: uname == 'Linux'
+
+- name: Detecting Darwin
+  set_fact:
+    ansible_os_family: Darwin
+  when: uname == 'Darwin'
+
+- name: Detecting FreeBSD
+  set_fact:
+    ansible_os_family: FreeBSD
+  when: uname == 'FreeBSD'
+
+- fail: msg="Unsupported OS '{{ uname }}'"
+  when: ansible_os_family is not defined
+
+- name: "Run OS-specific tasks"
+  include_tasks: "{{item}}"
+  with_first_found:
+    - "{{ ansible_distribution }}-{{ ansible_distribution_version }}"
+    - "{{ ansible_distribution }}.yml"
+    - "{{ ansible_os_family }}.yml"
+    - "default.yml"

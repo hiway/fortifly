@@ -1,0 +1,5 @@
+---
+- src: https://github.com/hiway/ansible-sshd/
+  name: ansible-sshd
+  version: support-macos
+  scm: git

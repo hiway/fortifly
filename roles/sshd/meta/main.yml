@@ -1,0 +1,19 @@
+---
+dependencies:
+  - role: "ansible-sshd"
+    become: yes
+    become_method: sudo
+    vars:
+      sshd:
+        ListenAddress: "{{ ListenAddress | default(['0.0.0.0']) }}"
+        Port: "{{ Port | default('22') }}"
+        Protocol: "{{ Protocol | default('2') }}"
+        PermitRootLogin: "{{ PermitRootLogin | default('prohibit-password') }}"
+        MaxAuthTries: "{{ MaxAuthTries | default('2') }}"
+        MaxSessions: "{{ MaxSessions | default('10') }}"
+        PasswordAuthentication: "{{ PasswordAuthentication | default('no') }}"
+        UsePAM: "{{ UsePAM | default('no') }}"
+        X11Forwarding: "{{ X11Forwarding | default('no') }}"
+        Banner: none
+        PrintMotd: no
+        VersionAddendum: none
