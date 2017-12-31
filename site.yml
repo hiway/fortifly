@@ -24,8 +24,8 @@
         - accounts
     - role: "sshd"
       vars:
-        sshd_Port: "22"
-        sshd_ListenAddress: "0.0.0.0"
+        sshd_Port: "{{sshd_port | default('22')}}"
+        sshd_ListenAddress: "{{sshd_host | default('0.0.0.0')}}"
       tags:
         - sshd
 

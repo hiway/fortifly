@@ -14,11 +14,10 @@ Fortifly: Basic FreeBSD/Ubuntu hardening for cloud servers (ansible playbooks).
   - Common:
     - Install `python 2.7`
     - Install `mosh`
-    - Create user: `group_vars/all -> ssh_user`
-    - Add public key: `group_vars/all -> ssh_public_key`
-    - Allow wheel and user to sudo (NOPASSWD)
-    - Update sshd port: `group_vars/all -> ssh_port`.
-    - Disable root login on ssh.
+    - Create users and add public keys.
+    - Allow wheel and user to sudo. Optionally without password.
+    - Set sshd listening address and port.
+    - Disable password logins on ssh.
 
 ## Install:
 
@@ -38,7 +37,7 @@ $ ansible-playbook site.yml \
   -i "10.0.0.1," \
   --ask-pass  \
   --tags linux \ 
-  --extra-vars="sshd_port=222 ssh_user=$USER"
+  --extra-vars="sshd_port=222"
 ```
 
 ## Expects:
