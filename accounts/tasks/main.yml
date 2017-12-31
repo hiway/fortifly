@@ -8,7 +8,7 @@
 
 - name: Install sudo
   include_role:
-    name: metapackage
+    name: fortifly/metapackage
   vars:
     package_name: sudo
     package_state: present

@@ -1,0 +1,26 @@
+galaxy_info:
+  author: Harshad Sharma
+  description: Basic FreeBSD/Ubuntu/MacOS hardening.
+  license: MIT
+  min_ansible_version: 2.2
+  platforms:
+  - name: Ubuntu
+    versions:
+    - xenial
+  - name: FreeBSD
+    version:
+    - 11.1
+  - name: MacOS
+    versions:
+    - 10.12 (Sierra)
+  galaxy_tags:
+  - system
+  - setup
+  - server
+  - laptop
+  - workstation
+  - ubuntu
+  - freebsd
+  - macos
+#dependencies:
+#  - ansible-sshd

@@ -6,7 +6,7 @@ dependencies:
       charset: "UTF-8"
     tags:
       - locale
-  - role: "metapackage"
+  - role: "fortifly/metapackage"
     vars:
       installed:
         - bash

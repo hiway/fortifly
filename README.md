@@ -1,6 +1,6 @@
 # fortifly
 
-Fortifly: Basic FreeBSD/Ubuntu/MacOS hardening for cloud servers (ansible playbooks).
+Fortifly: Basic FreeBSD/Ubuntu/MacOS hardening (ansible playbooks).
 
 ## Performs tasks:
 
