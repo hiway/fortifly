@@ -39,7 +39,6 @@ Harden a host without changing the `hosts` or `site.yml` files. Run inside pipen
 $ ansible-playbook site.yml \
   -i "10.0.0.1," \
   --ask-pass  \
-  --tags linux \ 
   --extra-vars="sshd_port=222"
 ```
 

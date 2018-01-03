@@ -1,6 +1,6 @@
 ---
 - name: Check pkg.
-  command: /usr/sbin/pkg -N
+  raw: /usr/sbin/pkg -N
   register: pkg
   ignore_errors: True
   changed_when: pkg is failed
@@ -8,18 +8,14 @@
 - name: Install pkg.
   become: yes
   become_method: sudo
-  command: /usr/bin/env ASSUME_ALWAYS_YES=1 /usr/sbin/pkg bootstrap -f
+  raw: /usr/bin/env ASSUME_ALWAYS_YES=1 /usr/sbin/pkg bootstrap -f
   when: pkg is failed
 
 - name: Update pkg
   become: yes
   become_method: sudo
-  command: pkg update -f
+  raw: pkg update -f
   when: pkg is failed
-
-- name: Set timezone to UTC
-  timezone:
-    name: UTC
 
 - name: Check python.
   command: /usr/bin/python -V
@@ -37,3 +33,7 @@
   become_method: sudo
   command: ln /usr/local/bin/python2.7 /usr/bin/python
   when: python_installed is failed
+
+- name: Set timezone to UTC
+  timezone:
+    name: UTC
