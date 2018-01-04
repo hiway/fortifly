@@ -18,20 +18,20 @@
   when: pkg is failed
 
 - name: Check python.
-  command: /usr/bin/python -V
+  raw: /usr/bin/python -V
   register: python_installed
   ignore_errors: True
   changed_when: python_installed is failed
 - name: Install python-2.7
   become: yes
   become_method: sudo
-  command: /usr/sbin/pkg install -y python27
+  raw: /usr/sbin/pkg install -y python27
   when: python_installed is failed
 
 - name: Symlink python 2.7 to /usr/bin
   become: yes
   become_method: sudo
-  command: ln /usr/local/bin/python2.7 /usr/bin/python
+  raw: ln /usr/local/bin/python2.7 /usr/bin/python
   when: python_installed is failed
 
 - name: Set timezone to UTC
